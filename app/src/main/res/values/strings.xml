@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MovieDB</string>
+    <string name="base_url">https://api.themoviedb.org/3/</string>
+    <string name="discover_movie">discover/movie</string>
+    <string name="find_movie">movie/id</string>
+    <string name="moviedb_api_key">api_key=9f3337aa24cc4e3b3e50dbdb65950c09</string>
+    <string name="default_poster_size">w185</string>
+    <string name="action_settings">Settings</string>
+    <string name="movies">Movies</string>
+    <string name="title_activity_movie_details">Movie Details</string>
+    <string name="hello_world">Hello world!</string>
+</resources>

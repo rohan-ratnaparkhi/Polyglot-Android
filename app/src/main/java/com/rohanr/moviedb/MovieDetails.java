@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +38,7 @@ public class MovieDetails extends ActionBarActivity {
     TextView rating;
     TextView year;
     Context parent;
+    ArrayList<Trailers> trailersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,7 @@ public class MovieDetails extends ActionBarActivity {
                     year.setText(result.get("release_date").toString());
                     desc.setText(result.getString("overview"));
                     Picasso.with(parent).load("http://image.tmdb.org/t/p/" + getString(R.string.default_poster_size) + result.getString("poster_path")).into(img);
+                    new TrailersData().execute("");
                 }
 
             } catch (Exception e){
@@ -136,6 +140,100 @@ public class MovieDetails extends ActionBarActivity {
 
     }
 
+    private class TrailersData extends AsyncTask<String, Integer, JSONObject>{
+
+        @Override
+        protected void onPreExecute() {
+//            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject response;
+            int i = 0;
+            publishProgress(i);
+            StringBuilder urlString = new StringBuilder();
+            urlString.append(getString(R.string.base_url));
+            urlString.append(getString(R.string.find_movie).replace("id",movieId));
+            urlString.append(getString(R.string.get_videos)).append("?");
+            urlString.append(getString(R.string.moviedb_api_key));
+            try{
+                URL url = new URL(urlString.toString());
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                bufferedReader.close();
+                urlConnection.disconnect();
+                response = (JSONObject) new JSONTokener(stringBuilder.toString()).nextValue();
+            } catch (Exception e){
+                Log.e("movieDb", e.getMessage());
+                response = null;
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject result) {
+            trailersList = new ArrayList<Trailers>();
+            Log.d("movieDb", "reached in post execute");
+            try{
+                if(result != null){
+                    JSONArray trailers = result.getJSONArray("results");
+                    for(int i=0;i<trailers.length();i++){
+                        JSONObject obj = trailers.getJSONObject(i);
+                        Trailers tr = new Trailers();
+                        tr.name = obj.getString("name");
+                        tr.site = obj.getString("site");
+                        tr.type = obj.getString("type");
+                        trailersList.add(tr);
+                    }
+                }
+                if(trailersList.size() > 0){
+//                    Trai
+                }
+            } catch (Exception e){
+                Log.e("movieDb", e.getMessage());
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+        }
+
+    }
+
 }
 
+class Trailers {
+    String name;
+    String site;
+    String type;
+}
 
+class TrailerListAdapter extends BaseAdapter{
+
+    @Override
+    public int getCount() {
+        return 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return null;
+    }
+}

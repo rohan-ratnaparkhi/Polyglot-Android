@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/Users/rohanr/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jar="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-bc00ec723d1004fa57f589230cf7546f66484fd7.jar" />
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-a35c37162453adb850de707acdf02c04ec9c0f32.jar" />
     </item>
     <item
-        jar="/Users/rohanr/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jar="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-d2dde85a72ed3ebb1582a9278e1933025aefe7b8.jar" />
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/pre-dexed/debug/classes-c6adfb7108a8c8963bdc0a8d9a17e7d7bcc42c9b.jar" />
     </item>
     <item
         jar="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
@@ -23,11 +23,18 @@
         <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/classes-27c092df47fec0cc5077eb0186f66b6e69815e00.jar" />
     </item>
     <item
-        jar="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jar="/Users/rohanr/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/classes-5de61f65c9dab7ab681c2e90e865f0784177cbc2.jar" />
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-d2dde85a72ed3ebb1582a9278e1933025aefe7b8.jar" />
+    </item>
+    <item
+        jar="/Users/rohanr/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-bc00ec723d1004fa57f589230cf7546f66484fd7.jar" />
     </item>
     <item
         jar="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
@@ -35,6 +42,20 @@
         revision="22.0.1"
         sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
         <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-e8d9de5b36f8a85bbf77ffcf9967c5fc674492d7.jar" />
+    </item>
+    <item
+        jar="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/pre-dexed/debug/classes-ead04cd5490848b5dac33c05f3a9e3f00dfdee7b.jar" />
+    </item>
+    <item
+        jar="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/rohanr/Desktop/AndroidTraining/MovieDB/app/build/intermediates/pre-dexed/debug/classes-5de61f65c9dab7ab681c2e90e865f0784177cbc2.jar" />
     </item>
 
 </items>

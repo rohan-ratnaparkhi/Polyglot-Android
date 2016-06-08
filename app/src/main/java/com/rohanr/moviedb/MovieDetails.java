@@ -6,13 +6,16 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -39,11 +42,35 @@ public class MovieDetails extends ActionBarActivity {
     TextView year;
     Context parent;
     ArrayList<Trailers> trailersList;
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
+        lv = (ListView) findViewById(R.id.lv_trailers);
+        lv.setOnTouchListener(new ListView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
+
         Bundle bundle = getIntent().getExtras();
         title = (TextView) findViewById(R.id.dtl_title);
         desc = (TextView) findViewById(R.id.dtl_desc);
@@ -193,7 +220,7 @@ public class MovieDetails extends ActionBarActivity {
                     }
                 }
                 if(trailersList.size() > 0){
-//                    Trai
+                    lv.setAdapter(new TrailerListAdapter(parent, trailersList));
                 }
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
@@ -217,23 +244,45 @@ class Trailers {
 
 class TrailerListAdapter extends BaseAdapter{
 
+    Context c;
+    ArrayList<Trailers> tList;
+
+    TrailerListAdapter(Context c, ArrayList<Trailers> tList){
+        this.c = c;
+        this.tList = tList;
+    }
+
     @Override
     public int getCount() {
-        return 0;
+        return tList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return tList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        View row = convertView;
+        if(row == null){
+            LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(R.layout.trailer_item, parent, false);
+        }
+        TextView nm = (TextView) row.findViewById(R.id.trl_name);
+        nm.setText(tList.get(position).name);
+
+        TextView st = (TextView) row.findViewById(R.id.trl_site);
+        st.setText(tList.get(position).site);
+
+        TextView ty = (TextView) row.findViewById(R.id.trl_type);
+        ty.setText(tList.get(position).type);
+
+        return row;
     }
 }

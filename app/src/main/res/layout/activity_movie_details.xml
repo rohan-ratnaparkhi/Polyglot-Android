@@ -4,94 +4,108 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="com.rohanr.moviedb.MovieDetails">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="5"
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/dtl_title"
-            android:layout_alignParentTop="true"
-            android:background="#ff41ca82"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="#ffffffff"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:gravity="center" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            tools:context="com.rohanr.moviedb.MovieDetails"
+            android:layout_weight="3">
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="200dp"
-            android:id="@+id/dtl_image"
-            android:layout_below="@+id/dtl_title"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:contentDescription="img" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/dtl_title"
+                android:layout_alignParentTop="true"
+                android:background="#ff41ca82"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#ffffffff"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:gravity="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dtl_year"
-            android:layout_marginLeft="64dp"
-            android:layout_marginStart="64dp"
-            android:layout_alignTop="@+id/dtl_image"
-            android:layout_toRightOf="@+id/dtl_image"
-            android:layout_toEndOf="@+id/dtl_image"
-            android:layout_marginTop="20dp" />
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="200dp"
+                android:id="@+id/dtl_image"
+                android:layout_below="@+id/dtl_title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="img" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dtl_run_time"
-            android:layout_below="@+id/dtl_year"
-            android:layout_alignLeft="@+id/dtl_year"
-            android:layout_alignStart="@+id/dtl_year"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/dtl_year"
+                android:layout_marginLeft="64dp"
+                android:layout_marginStart="64dp"
+                android:layout_alignTop="@+id/dtl_image"
+                android:layout_toRightOf="@+id/dtl_image"
+                android:layout_toEndOf="@+id/dtl_image"
+                android:layout_marginTop="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dtl_rating"
-            android:layout_below="@+id/dtl_run_time"
-            android:layout_alignLeft="@+id/dtl_run_time"
-            android:layout_alignStart="@+id/dtl_run_time"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/dtl_run_time"
+                android:layout_below="@+id/dtl_year"
+                android:layout_alignLeft="@+id/dtl_year"
+                android:layout_alignStart="@+id/dtl_year"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dtl_desc"
-            android:layout_alignLeft="@+id/dtl_image"
-            android:layout_alignStart="@+id/dtl_image"
-            android:layout_below="@+id/dtl_image"
-            android:layout_alignRight="@+id/dtl_title"
-            android:layout_alignEnd="@+id/dtl_title"
-            android:paddingBottom="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/dtl_rating"
+                android:layout_below="@+id/dtl_run_time"
+                android:layout_alignLeft="@+id/dtl_run_time"
+                android:layout_alignStart="@+id/dtl_run_time"
+                android:layout_marginTop="10dp" />
 
-        <View
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dtl_desc"
+                android:layout_alignLeft="@+id/dtl_image"
+                android:layout_alignStart="@+id/dtl_image"
+                android:layout_below="@+id/dtl_image"
+                android:layout_alignRight="@+id/dtl_title"
+                android:layout_alignEnd="@+id/dtl_title"
+                android:paddingBottom="10dp" />
+
+
+
+
+        </RelativeLayout>
+
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/view" />
+            android:layout_height="wrap_content"
+            android:id="@+id/lv_trailers"
+            android:layout_weight="2"></ListView>
 
-    </RelativeLayout>
-
-
+    </LinearLayout>
 
 </ScrollView>
+
+

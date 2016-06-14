@@ -1,17 +1,8 @@
-<ScrollView
+<android.support.v4.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="5"
-        >
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
@@ -20,7 +11,7 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
             tools:context="com.rohanr.moviedb.MovieDetails"
-            android:layout_weight="3">
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,19 +84,18 @@
                 android:layout_alignEnd="@+id/dtl_title"
                 android:paddingBottom="10dp" />
 
-
-
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_trailers"
+                android:layout_below="@+id/dtl_desc">
+            </android.support.v7.widget.RecyclerView>
 
         </RelativeLayout>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lv_trailers"
-            android:layout_weight="2"></ListView>
 
-    </LinearLayout>
 
-</ScrollView>
+
+</android.support.v4.widget.NestedScrollView>
 
 

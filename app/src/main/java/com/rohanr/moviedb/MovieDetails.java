@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,34 +46,34 @@ public class MovieDetails extends ActionBarActivity {
     TextView year;
     Context parent;
     ArrayList<Trailers> trailersList;
-    ListView lv;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-        lv = (ListView) findViewById(R.id.lv_trailers);
-        lv.setOnTouchListener(new ListView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow ScrollView to intercept touch events.
-                        v.getParent().requestDisallowInterceptTouchEvent(true);
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        // Allow ScrollView to intercept touch events.
-                        v.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                }
-
-                // Handle ListView touch events.
-                v.onTouchEvent(event);
-                return true;
-            }
-        });
+        recyclerView = (RecyclerView) findViewById(R.id.rv_trailers);
+//        lv.setOnTouchListener(new ListView.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                int action = event.getAction();
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        // Disallow ScrollView to intercept touch events.
+//                        v.getParent().requestDisallowInterceptTouchEvent(true);
+//                        break;
+//
+//                    case MotionEvent.ACTION_UP:
+//                        // Allow ScrollView to intercept touch events.
+//                        v.getParent().requestDisallowInterceptTouchEvent(false);
+//                        break;
+//                }
+//
+//                // Handle ListView touch events.
+//                v.onTouchEvent(event);
+//                return true;
+//            }
+//        });
 
         Bundle bundle = getIntent().getExtras();
         title = (TextView) findViewById(R.id.dtl_title);
@@ -170,6 +173,8 @@ public class MovieDetails extends ActionBarActivity {
 
     private class TrailersData extends AsyncTask<String, Integer, JSONObject> implements AdapterView.OnItemClickListener{
 
+        private  TrailerVideoAdapter mAdapter;
+
         @Override
         protected void onPreExecute() {
 //            progressBar.setVisibility(View.VISIBLE);
@@ -222,8 +227,24 @@ public class MovieDetails extends ActionBarActivity {
                     }
                 }
                 if(trailersList.size() > 0){
-                    lv.setAdapter(new TrailerListAdapter(parent, trailersList));
-                    lv.setOnItemClickListener(this);
+
+                    mAdapter = new TrailerVideoAdapter(parent, trailersList);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(mAdapter);
+
+                    new ReviewOperation().execute("");
+
+
+//                    recyclerView.setAdapter(new TrailerVideoAdapter(parent, trailersList));
+//                    recyclerView.setLayoutManager(new WrappingLinearLayoutManager(parent));
+//                    recyclerView.setNestedScrollingEnabled(false);
+//                    recyclerView.setHasFixedSize(false);
+
+
+
+//                    lv.setOnItemClickListener(this);
                 }
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
@@ -242,6 +263,68 @@ public class MovieDetails extends ActionBarActivity {
 
     }
 
+    private class ReviewOperation extends AsyncTask<String, Integer, JSONObject>{
+
+        @Override
+        protected void onPreExecute() {
+//            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            JSONObject response;
+            int i = 0;
+            publishProgress(i);
+            StringBuilder urlString = new StringBuilder();
+            urlString.append(getString(R.string.base_url));
+            urlString.append(getString(R.string.find_movie).replace("id",movieId));
+            urlString.append(getString(R.string.get_reviews)).append("?");
+            urlString.append(getString(R.string.moviedb_api_key));
+            try{
+                URL url = new URL(urlString.toString());
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                bufferedReader.close();
+                urlConnection.disconnect();
+                response = (JSONObject) new JSONTokener(stringBuilder.toString()).nextValue();
+            } catch (Exception e){
+                Log.e("movieDb", e.getMessage());
+                response = null;
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject result) {
+            Log.d("movieDb", "reached in post execute for Reviews");
+            try{
+                if(result != null){
+//                    title.setText(result.getString("title"));
+//                    rating.setText(result.getString("vote_average") + "/10");
+//                    runTime.setText(result.get("runtime").toString() + " mins");
+//                    year.setText(result.get("release_date").toString());
+//                    desc.setText(result.getString("overview"));
+//                    Picasso.with(parent).load("http://image.tmdb.org/t/p/" + getString(R.string.default_poster_size) + result.getString("poster_path")).into(img);
+//                    new TrailersData().execute("");
+                }
+
+            } catch (Exception e){
+                Log.e("movieDb", e.getMessage());
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+        }
+
+    }
+
 }
 
 class Trailers {
@@ -251,49 +334,94 @@ class Trailers {
     String key;
 }
 
-class TrailerListAdapter extends BaseAdapter {
+class TrailerVideoAdapter extends RecyclerView.Adapter<TrailerVideoAdapter.MyViewHolder> {
 
     Context c;
     ArrayList<Trailers> tList;
 
-    TrailerListAdapter(Context c, ArrayList<Trailers> tList){
+    TrailerVideoAdapter(Context c, ArrayList<Trailers> tList){
         this.c = c;
         this.tList = tList;
     }
 
-    @Override
-    public int getCount() {
-        return tList.size();
-    }
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView tName, tType, tSite;
+        public ImageView tImage;
 
-    @Override
-    public Object getItem(int position) {
-        return tList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        if(row == null){
-            LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.trailer_item, parent, false);
+        public MyViewHolder(View view) {
+            super(view);
+            tName = (TextView) view.findViewById(R.id.trl_name);
+            tType = (TextView) view.findViewById(R.id.trl_type);
+            tSite = (TextView) view.findViewById(R.id.trl_site);
+            tImage = (ImageView) view.findViewById(R.id.trl_image);
         }
-        TextView nm = (TextView) row.findViewById(R.id.trl_name);
-        nm.setText(tList.get(position).name);
-
-        TextView st = (TextView) row.findViewById(R.id.trl_site);
-        st.setText(tList.get(position).site);
-
-        TextView ty = (TextView) row.findViewById(R.id.trl_type);
-        ty.setText(tList.get(position).type);
-
-        return row;
     }
 
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.trailer_item, parent, false);
 
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Trailers trl = tList.get(position);
+        holder.tName.setText(trl.name);
+        holder.tSite.setText(trl.site);
+        holder.tType.setText(trl.type);
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.tList.size();
+    }
 }
+
+//class TrailerListAdapter extends BaseAdapter {
+//
+//    Context c;
+//    ArrayList<Trailers> tList;
+//
+//    TrailerListAdapter(Context c, ArrayList<Trailers> tList){
+//        this.c = c;
+//        this.tList = tList;
+//    }
+//
+//    @Override
+//    public int getCount() {
+//        return tList.size();
+//    }
+//
+//    @Override
+//    public Object getItem(int position) {
+//        return tList.get(position);
+//    }
+//
+//    @Override
+//    public long getItemId(int position) {
+//        return position;
+//    }
+//
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        View row = convertView;
+//        if(row == null){
+//            LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            row = inflater.inflate(R.layout.trailer_item, parent, false);
+//        }
+//        TextView nm = (TextView) row.findViewById(R.id.trl_name);
+//        nm.setText(tList.get(position).name);
+//
+//        TextView st = (TextView) row.findViewById(R.id.trl_site);
+//        st.setText(tList.get(position).site);
+//
+//        TextView ty = (TextView) row.findViewById(R.id.trl_type);
+//        ty.setText(tList.get(position).type);
+//
+//        return row;
+//    }
+//
+//
+//}

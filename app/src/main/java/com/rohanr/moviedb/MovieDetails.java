@@ -2,6 +2,7 @@ package com.rohanr.moviedb;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -167,7 +168,7 @@ public class MovieDetails extends ActionBarActivity {
 
     }
 
-    private class TrailersData extends AsyncTask<String, Integer, JSONObject>{
+    private class TrailersData extends AsyncTask<String, Integer, JSONObject> implements AdapterView.OnItemClickListener{
 
         @Override
         protected void onPreExecute() {
@@ -216,11 +217,13 @@ public class MovieDetails extends ActionBarActivity {
                         tr.name = obj.getString("name");
                         tr.site = obj.getString("site");
                         tr.type = obj.getString("type");
+                        tr.key = obj.getString("key");
                         trailersList.add(tr);
                     }
                 }
                 if(trailersList.size() > 0){
                     lv.setAdapter(new TrailerListAdapter(parent, trailersList));
+                    lv.setOnItemClickListener(this);
                 }
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
@@ -232,6 +235,11 @@ public class MovieDetails extends ActionBarActivity {
 
         }
 
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + trailersList.get(position).key)));
+        }
+
     }
 
 }
@@ -240,9 +248,10 @@ class Trailers {
     String name;
     String site;
     String type;
+    String key;
 }
 
-class TrailerListAdapter extends BaseAdapter{
+class TrailerListAdapter extends BaseAdapter {
 
     Context c;
     ArrayList<Trailers> tList;
@@ -285,4 +294,6 @@ class TrailerListAdapter extends BaseAdapter{
 
         return row;
     }
+
+
 }

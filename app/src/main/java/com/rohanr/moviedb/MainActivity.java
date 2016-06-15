@@ -5,21 +5,15 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.os.AsyncTask;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.GridLayoutAnimationController;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.rohanr.moviedb.Adapter.MovieListAdapter;
+import com.rohanr.moviedb.Entity.MovieData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -77,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPreExecute() {
-//            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -123,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
                 if(movieList.size() > 0){
-                    myGrid.setAdapter(new MyAdapter(movieList, mainContext));
+                    myGrid.setAdapter(new MovieListAdapter(movieList, mainContext));
                     myGrid.setOnItemClickListener(this);
                 }
             } catch (Exception e){
@@ -138,75 +132,11 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            Toast.makeText(mainContext, "name="+ movieList.get(position).title, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(mainContext, MovieDetails.class);
-            intent.putExtra("movieId", movieList.get(position).movieId);
-            intent.putExtra("movieName",movieList.get(position).title.toString());
+            intent.putExtra("movieId", movieList.get(position).getMovieId());
+            intent.putExtra("movieName",movieList.get(position).getTitle().toString());
             startActivity(intent);
         }
     }
 
-}
-
-class MovieData {
-    String imageUrl;
-    String title;
-    Integer movieId;
-    MovieData(String imageUrl, String title, Integer movieId){
-        this.imageUrl = imageUrl;
-        this.title = title;
-        this.movieId = movieId;
-    }
-}
-
-class MyAdapter extends BaseAdapter{
-
-    ArrayList<MovieData> movies;
-    Context context;
-
-    MyAdapter(ArrayList<MovieData> movies, Context context){
-        this.movies = movies;
-        this.context = context;
-    }
-
-    class ViewHolder{
-        ImageView myMovie;
-        ViewHolder(View v){
-            myMovie = (ImageView) v.findViewById(R.id.imageView);
-        }
-    }
-
-    @Override
-    public int getCount() {
-        return this.movies.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return this.movies.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return this.movies.get(position).movieId;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        ViewHolder holder = null;
-        if(row == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.single_item, parent, false);
-            holder = new ViewHolder(row);
-            row.setTag(holder);
-        } else {
-            holder = (ViewHolder) row.getTag();
-        }
-
-        Picasso.with(context).load(movies.get(position).imageUrl).into(holder.myMovie);
-        holder.myMovie.setAdjustViewBounds(true);
-
-        return row;
-    }
 }

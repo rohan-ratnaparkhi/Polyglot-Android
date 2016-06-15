@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="22.0.1"
+        sha1="8e8fb01bcf7cea69cd4d876efc36902635f0f844">
+        <dex dex="/Users/rohanr/Desktop/Training/Android/MovieDbApp/Polyglot-Android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_2ac3c255fa45fcbcd220a8b779e85e80bbb9e1df/classes.dex" />
+    </item>
+
+</items>

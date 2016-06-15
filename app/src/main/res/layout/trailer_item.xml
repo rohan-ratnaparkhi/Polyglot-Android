@@ -10,7 +10,6 @@
         android:id="@+id/trl_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/red"
         android:layout_marginRight="10dp"/>
 
     <TextView

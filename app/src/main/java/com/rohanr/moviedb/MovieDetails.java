@@ -1,27 +1,25 @@
 package com.rohanr.moviedb;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.rohanr.moviedb.Adapter.ReviewAdapter;
+import com.rohanr.moviedb.Adapter.TrailerVideoAdapter;
+import com.rohanr.moviedb.Entity.Review;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -34,6 +32,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.rohanr.moviedb.Entity.Trailers;
+
 
 public class MovieDetails extends ActionBarActivity {
 
@@ -44,16 +44,21 @@ public class MovieDetails extends ActionBarActivity {
     TextView runTime;
     TextView rating;
     TextView year;
+    TextView favorite;
+    Button markFav;
     Context parent;
     ArrayList<Trailers> trailersList;
     ArrayList<Review> reviewsList;
     RecyclerView recyclerView, recyclerViewReview;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
+        parent = this;
         recyclerView = (RecyclerView) findViewById(R.id.rv_trailers);
+
         recyclerViewReview = (RecyclerView) findViewById(R.id.rv_reviews);
 
         Bundle bundle = getIntent().getExtras();
@@ -64,7 +69,29 @@ public class MovieDetails extends ActionBarActivity {
         img = (ImageView) findViewById(R.id.dtl_image);
         year = (TextView) findViewById(R.id.dtl_year);
         movieId = bundle.get("movieId").toString();
-        parent = this;
+        favorite = (TextView) findViewById(R.id.tv_fav);
+        markFav = (Button) findViewById(R.id.btn_fav);
+
+        db = openOrCreateDatabase("movieDbApp", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS FavoriteMovie(id INTEGER);");
+
+        Cursor resultSet = db.rawQuery("Select * from FavoriteMovie where id=" + movieId,null);
+        Log.d("movieDb","records in db: " + resultSet.getCount());
+        if(resultSet.getCount() > 0){
+            favorite.setAlpha(1);
+        } else {
+            markFav.setAlpha(1);
+        }
+
+        markFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.execSQL("INSERT INTO FavoriteMovie(id) VALUES("+ movieId +")");
+                markFav.setAlpha(0);
+                favorite.setAlpha(1);
+            }
+        });
+
         new LongOperation().execute("");
 
     }
@@ -95,7 +122,7 @@ public class MovieDetails extends ActionBarActivity {
 
         @Override
         protected void onPreExecute() {
-//            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -149,23 +176,20 @@ public class MovieDetails extends ActionBarActivity {
         protected void onProgressUpdate(Integer... values) {
 
         }
-
     }
 
-    private class TrailersData extends AsyncTask<String, Integer, JSONObject> implements AdapterView.OnItemClickListener{
+    private class TrailersData extends AsyncTask<String, Integer, JSONObject> {
 
-        private  TrailerVideoAdapter mAdapter;
+        private TrailerVideoAdapter mAdapter;
 
         @Override
         protected void onPreExecute() {
-//            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject response;
-            int i = 0;
-            publishProgress(i);
             StringBuilder urlString = new StringBuilder();
             urlString.append(getString(R.string.base_url));
             urlString.append(getString(R.string.find_movie).replace("id",movieId));
@@ -200,10 +224,10 @@ public class MovieDetails extends ActionBarActivity {
                     for(int i=0;i<trailers.length();i++){
                         JSONObject obj = trailers.getJSONObject(i);
                         Trailers tr = new Trailers();
-                        tr.name = obj.getString("name");
-                        tr.site = obj.getString("site");
-                        tr.type = obj.getString("type");
-                        tr.key = obj.getString("key");
+                        tr.setName(obj.getString("name"));
+                        tr.setSite(obj.getString("site"));
+                        tr.setType(obj.getString("type"));
+                        tr.setKey(obj.getString("key"));
                         trailersList.add(tr);
                     }
                 }
@@ -226,16 +250,7 @@ public class MovieDetails extends ActionBarActivity {
         protected void onProgressUpdate(Integer... values) {
 
         }
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + trailersList.get(position).key)));
-        }
-
     }
-
-
-
 
     private class ReviewOperation extends AsyncTask<String, Integer, JSONObject>{
 
@@ -243,7 +258,7 @@ public class MovieDetails extends ActionBarActivity {
 
         @Override
         protected void onPreExecute() {
-//            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -285,8 +300,8 @@ public class MovieDetails extends ActionBarActivity {
                     for(int i=0;i<reviews.length();i++){
                         JSONObject obj = reviews.getJSONObject(i);
                         Review rev = new Review();
-                        rev.reviewer = obj.getString("author");
-                        rev.comment = obj.getString("content");
+                        rev.setReviewer(obj.getString("author"));
+                        rev.setComment(obj.getString("content"));
                         reviewsList.add(rev);
                     }
                 }
@@ -307,108 +322,13 @@ public class MovieDetails extends ActionBarActivity {
         protected void onProgressUpdate(Integer... values) {
 
         }
-
     }
 
 }
 
-class Trailers {
-    String name;
-    String site;
-    String type;
-    String key;
-}
-
-class TrailerVideoAdapter extends RecyclerView.Adapter<TrailerVideoAdapter.MyViewHolder> {
-
-    Context c;
-    ArrayList<Trailers> tList;
-
-    TrailerVideoAdapter(Context c, ArrayList<Trailers> tList){
-        this.c = c;
-        this.tList = tList;
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tName, tType, tSite;
-        public ImageView tImage;
-
-        public MyViewHolder(View view) {
-            super(view);
-            tName = (TextView) view.findViewById(R.id.trl_name);
-            tType = (TextView) view.findViewById(R.id.trl_type);
-            tSite = (TextView) view.findViewById(R.id.trl_site);
-            tImage = (ImageView) view.findViewById(R.id.trl_image);
-        }
-    }
-
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.trailer_item, parent, false);
-
-        return new MyViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Trailers trl = tList.get(position);
-        holder.tName.setText(trl.name);
-        holder.tSite.setText(trl.site);
-        holder.tType.setText(trl.type);
-    }
-
-    @Override
-    public int getItemCount() {
-        return this.tList.size();
-    }
-}
 
 
-class Review {
-    String reviewer;
-    String comment;
-}
 
-class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.MyViewHolder> {
 
-    Context c;
-    ArrayList<Review> rList;
-
-    ReviewAdapter(Context c, ArrayList<Review> rList){
-        this.c = c;
-        this.rList = rList;
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView rName, rComment;
-
-        public MyViewHolder(View view) {
-            super(view);
-            rName = (TextView) view.findViewById(R.id.rev_author);
-            rComment = (TextView) view.findViewById(R.id.rev_comment);
-        }
-    }
-
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.review_item, parent, false);
-
-        return new MyViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Review rev = rList.get(position);
-        holder.rName.setText(rev.reviewer);
-        holder.rComment.setText(rev.comment);
-    }
-
-    @Override
-    public int getItemCount() {
-        return this.rList.size();
-    }
-}
 
 

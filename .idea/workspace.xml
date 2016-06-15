@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="movieDb" />
+        <option name="name" value="movieDb" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
   <component name="AndroidLayouts">
     <shared>
       <config>
@@ -15,12 +27,14 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="movieDb" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f578bfd-65a3-40ab-8cc6-1760cb5a013b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/review_item.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/WrappingLinearLayoutManager.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Adapter/ReviewAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Adapter/TrailerVideoAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Review.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Trailers.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
@@ -30,9 +44,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MovieDetails.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MovieDetails.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/trailer_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/trailer_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="Polyglot-Android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,39 +80,64 @@
       <file leaf-file-name="MovieDetails.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MovieDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71141976">
-              <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.96875">
+              <caret line="56" column="43" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
               <folding>
-                <element signature="e#3400#3428#0" expanded="true" />
-                <element signature="e#3460#3490#0" expanded="true" />
-                <element signature="e#3556#3591#0" expanded="true" />
-                <element signature="e#5086#5125#0" expanded="true" />
-                <element signature="e#6004#6032#0" expanded="true" />
-                <element signature="e#6064#6094#0" expanded="true" />
-                <element signature="e#6148#6178#0" expanded="true" />
-                <element signature="e#6222#6257#0" expanded="true" />
-                <element signature="e#9347#9375#0" expanded="true" />
-                <element signature="e#9407#9437#0" expanded="true" />
-                <element signature="e#9491#9522#0" expanded="true" />
-                <element signature="e#9566#9601#0" expanded="true" />
-                <element signature="e#13182#13183#0" expanded="true" />
-                <element signature="e#13222#13223#0" expanded="true" />
-                <element signature="e#14386#14387#0" expanded="true" />
-                <element signature="e#14426#14427#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2824#3098#0" expanded="true" />
+                <element signature="e#3097#3098#0" expanded="true" />
+                <element signature="e#4298#4326#0" expanded="true" />
+                <element signature="e#4358#4388#0" expanded="true" />
+                <element signature="e#4454#4489#0" expanded="true" />
+                <element signature="e#5984#6023#0" expanded="true" />
+                <element signature="e#6749#6777#0" expanded="true" />
+                <element signature="e#6809#6839#0" expanded="true" />
+                <element signature="e#6893#6923#0" expanded="true" />
+                <element signature="e#6967#7002#0" expanded="true" />
+                <element signature="e#9784#9812#0" expanded="true" />
+                <element signature="e#9844#9874#0" expanded="true" />
+                <element signature="e#9928#9959#0" expanded="true" />
+                <element signature="e#10003#10038#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MainActivity.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.6666665">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_movie_details.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.1355934">
+              <caret line="130" column="51" selection-start-line="130" selection-start-column="51" selection-end-line="130" selection-end-column="51" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#503#538#0" expanded="true" />
+                <element signature="e#572#607#0" expanded="true" />
+                <element signature="e#639#672#0" expanded="true" />
+                <element signature="e#707#740#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -104,8 +146,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -1419,7 +1461,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4395969314000" />
+        <entry key="$PROJECT_DIR$" value="4396056330000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1692,12 +1734,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/WrappingLinearLayoutManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/trailer_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/review_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/RecyclerItemClickListener.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Trailer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Trailers.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Review.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Adapter/ReviewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Adapter/TrailerVideoAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/trailer_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MovieDetails.java" />
       </list>
     </option>
@@ -1743,114 +1791,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Gradle Scripts" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Polyglot-Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Polyglot-Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Polyglot-Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Polyglot-Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Polyglot-Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="moviedb" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MovieDetails.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Polyglot-Android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="moviedb" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MainActivity.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2143,6 +2083,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2f578bfd-65a3-40ab-8cc6-1760cb5a013b" name="Default" comment="" />
@@ -2162,7 +2105,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44444445" sideWeight="0.50674534" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4879725" sideWeight="0.49325463" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30469644" sideWeight="0.49325463" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1846543" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298969" sideWeight="0.49662733" order="2" side_tool="false" content_ui="tabs" />
@@ -2171,12 +2114,12 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3141243" sideWeight="0.5033557" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20404722" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27908936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.185567" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2646048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2186,12 +2129,20 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2201,22 +2152,21 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3400#3428#0" expanded="true" />
-            <element signature="e#3460#3490#0" expanded="true" />
-            <element signature="e#3556#3591#0" expanded="true" />
-            <element signature="e#5086#5125#0" expanded="true" />
-            <element signature="e#6004#6032#0" expanded="true" />
-            <element signature="e#6064#6094#0" expanded="true" />
-            <element signature="e#6148#6178#0" expanded="true" />
-            <element signature="e#6222#6257#0" expanded="true" />
-            <element signature="e#9347#9375#0" expanded="true" />
-            <element signature="e#9407#9437#0" expanded="true" />
-            <element signature="e#9491#9522#0" expanded="true" />
-            <element signature="e#9566#9601#0" expanded="true" />
-            <element signature="e#13182#13183#0" expanded="true" />
-            <element signature="e#13222#13223#0" expanded="true" />
-            <element signature="e#14386#14387#0" expanded="true" />
-            <element signature="e#14426#14427#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2824#3098#0" expanded="true" />
+            <element signature="e#3097#3098#0" expanded="true" />
+            <element signature="e#4298#4326#0" expanded="true" />
+            <element signature="e#4358#4388#0" expanded="true" />
+            <element signature="e#4454#4489#0" expanded="true" />
+            <element signature="e#5984#6023#0" expanded="true" />
+            <element signature="e#6749#6777#0" expanded="true" />
+            <element signature="e#6809#6839#0" expanded="true" />
+            <element signature="e#6893#6923#0" expanded="true" />
+            <element signature="e#6967#7002#0" expanded="true" />
+            <element signature="e#9784#9812#0" expanded="true" />
+            <element signature="e#9844#9874#0" expanded="true" />
+            <element signature="e#9928#9959#0" expanded="true" />
+            <element signature="e#10003#10038#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2253,14 +2203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2270,14 +2212,6 @@
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7809187">
-          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
@@ -2299,39 +2233,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/trailer_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.83548385">
-          <caret line="97" column="54" selection-start-line="97" selection-start-column="54" selection-end-line="97" selection-end-column="54" />
-          <folding>
-            <element signature="e#503#538#0" expanded="true" />
-            <element signature="e#572#607#0" expanded="true" />
-            <element signature="e#639#672#0" expanded="true" />
-            <element signature="e#707#740#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MainActivity.java">
@@ -2344,27 +2251,165 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3325301">
+          <caret line="20053" column="13" selection-start-line="20053" selection-start-column="13" selection-end-line="20053" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/content/ContextWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.7">
+          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding>
+            <element signature="e#3023#3024#0" expanded="false" />
+            <element signature="e#3075#3076#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Trailers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <folding>
+            <element signature="e#231#232#0" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#298#299#0" expanded="true" />
+            <element signature="e#330#331#0" expanded="true" />
+            <element signature="e#361#362#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#428#429#0" expanded="true" />
+            <element signature="e#460#461#0" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+            <element signature="e#518#519#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#646#647#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
+            <element signature="e#714#715#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/single_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/trailer_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.1864405">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Adapter/TrailerVideoAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.12173913">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2288#2289#0" expanded="true" />
+            <element signature="e#2328#2329#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Entity/Review.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3252174">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding>
+            <element signature="e#191#192#0" expanded="true" />
+            <element signature="e#222#223#0" expanded="true" />
+            <element signature="e#270#271#0" expanded="true" />
+            <element signature="e#310#311#0" expanded="true" />
+            <element signature="e#344#345#0" expanded="true" />
+            <element signature="e#374#375#0" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/Adapter/ReviewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1507#1508#0" expanded="true" />
+            <element signature="e#1547#1548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_movie_details.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.1355934">
+          <caret line="130" column="51" selection-start-line="130" selection-start-column="51" selection-end-line="130" selection-end-column="51" />
+          <folding>
+            <element signature="e#503#538#0" expanded="true" />
+            <element signature="e#572#607#0" expanded="true" />
+            <element signature="e#639#672#0" expanded="true" />
+            <element signature="e#707#740#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.6666665">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rohanr/moviedb/MovieDetails.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71141976">
-          <caret line="236" column="0" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+        <state vertical-scroll-proportion="-4.96875">
+          <caret line="56" column="43" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
           <folding>
-            <element signature="e#3400#3428#0" expanded="true" />
-            <element signature="e#3460#3490#0" expanded="true" />
-            <element signature="e#3556#3591#0" expanded="true" />
-            <element signature="e#5086#5125#0" expanded="true" />
-            <element signature="e#6004#6032#0" expanded="true" />
-            <element signature="e#6064#6094#0" expanded="true" />
-            <element signature="e#6148#6178#0" expanded="true" />
-            <element signature="e#6222#6257#0" expanded="true" />
-            <element signature="e#9347#9375#0" expanded="true" />
-            <element signature="e#9407#9437#0" expanded="true" />
-            <element signature="e#9491#9522#0" expanded="true" />
-            <element signature="e#9566#9601#0" expanded="true" />
-            <element signature="e#13182#13183#0" expanded="true" />
-            <element signature="e#13222#13223#0" expanded="true" />
-            <element signature="e#14386#14387#0" expanded="true" />
-            <element signature="e#14426#14427#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2824#3098#0" expanded="true" />
+            <element signature="e#3097#3098#0" expanded="true" />
+            <element signature="e#4298#4326#0" expanded="true" />
+            <element signature="e#4358#4388#0" expanded="true" />
+            <element signature="e#4454#4489#0" expanded="true" />
+            <element signature="e#5984#6023#0" expanded="true" />
+            <element signature="e#6749#6777#0" expanded="true" />
+            <element signature="e#6809#6839#0" expanded="true" />
+            <element signature="e#6893#6923#0" expanded="true" />
+            <element signature="e#6967#7002#0" expanded="true" />
+            <element signature="e#9784#9812#0" expanded="true" />
+            <element signature="e#9844#9874#0" expanded="true" />
+            <element signature="e#9928#9959#0" expanded="true" />
+            <element signature="e#10003#10038#0" expanded="true" />
           </folding>
         </state>
       </provider>

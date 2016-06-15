@@ -91,6 +91,13 @@
                 android:layout_below="@+id/dtl_desc">
             </android.support.v7.widget.RecyclerView>
 
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_reviews"
+                android:layout_below="@+id/rv_trailers">
+            </android.support.v7.widget.RecyclerView>
+
         </RelativeLayout>
 
 

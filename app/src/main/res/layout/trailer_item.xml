@@ -10,7 +10,8 @@
         android:id="@+id/trl_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/red"/>
+        android:background="@color/red"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +20,8 @@
         android:text="trl_name"
         android:id="@+id/trl_name"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/trl_image" />
 
     <TextView
         android:layout_width="wrap_content"

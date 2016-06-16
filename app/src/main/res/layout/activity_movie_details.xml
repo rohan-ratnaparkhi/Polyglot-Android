@@ -89,15 +89,16 @@
                 android:layout_below="@+id/dtl_desc"
                 android:layout_height="2dp"
                 android:id="@+id/trailer_separator"
-                android:background="@color/red"
-                android:paddingBottom="10dp"/>
+                android:background="@color/grey"
+                android:paddingBottom="10dp"
+                android:alpha="0"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:id="@+id/rv_trailers"
-                android:layout_below="@+id/trailer_separator">
+                android:layout_below="@+id/tv_trailers">
             </android.support.v7.widget.RecyclerView>
 
 
@@ -106,15 +107,16 @@
                 android:layout_below="@+id/rv_trailers"
                 android:layout_height="2dp"
                 android:id="@+id/review_separator"
-                android:background="@color/red"
-                android:paddingBottom="10dp"/>
+                android:background="@color/grey"
+                android:paddingBottom="10dp"
+                android:alpha="0"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:id="@+id/rv_reviews"
-                android:layout_below="@+id/review_separator">
+                android:layout_below="@+id/tv_reviews">
             </android.support.v7.widget.RecyclerView>
 
             <Button
@@ -136,6 +138,32 @@
                 android:layout_alignBottom="@+id/dtl_image"
                 android:layout_alignLeft="@+id/dtl_rating"
                 android:layout_alignStart="@+id/dtl_rating"
+                android:alpha="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Trailers"
+                android:id="@+id/tv_trailers"
+                android:layout_below="@+id/trailer_separator"
+                android:layout_alignLeft="@+id/dtl_desc"
+                android:layout_alignStart="@+id/dtl_desc"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:alpha="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Reviews"
+                android:id="@+id/tv_reviews"
+                android:layout_below="@+id/review_separator"
+                android:layout_alignLeft="@+id/dtl_desc"
+                android:layout_alignStart="@+id/dtl_desc"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:alpha="0"/>
 
         </RelativeLayout>

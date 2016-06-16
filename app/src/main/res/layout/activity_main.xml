@@ -5,7 +5,7 @@
     android:numColumns="auto_fit"
     tools:context=".MainActivity"
     android:id="@+id/gridView"
-    android:background="@color/red">
+    android:background="@color/grey">
 
 
 </GridView>

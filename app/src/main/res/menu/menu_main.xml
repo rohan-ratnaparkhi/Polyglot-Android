@@ -1,6 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/filter_top_rated" android:title="@string/menu_top_rated_movies"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/filter_popular" android:title="@string/menu_popular_movies"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/filter_upcoming" android:title="@string/menu_upcoming_movies"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/filter_now_playing" android:title="@string/menu_now_playing_movies"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

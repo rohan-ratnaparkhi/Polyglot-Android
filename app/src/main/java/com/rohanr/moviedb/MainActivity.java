@@ -11,9 +11,11 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.rohanr.moviedb.Adapter.MovieListAdapter;
 import com.rohanr.moviedb.Entity.MovieData;
+import com.rohanr.moviedb.MyUtil.UrlConnections;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,28 +40,46 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mainContext = this;
         myGrid = (GridView) findViewById(R.id.gridView);
-        new LongOperation().execute("");
+        StringBuilder urlString = new StringBuilder();
+        urlString.append(getString(R.string.base_url));
+        urlString.append(getString(R.string.discover_movie)).append("?");
+        urlString.append(getString(R.string.moviedb_api_key));
+        new GetMovieList().execute(urlString.toString());
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        StringBuilder urlString = new StringBuilder();
+        urlString.append(getString(R.string.base_url));
+        urlString.append(getString(R.string.movie));
+
+        if (id == R.id.filter_now_playing) {
+            urlString.append(getString(R.string.now_playing_movies));
+            setTitle(R.string.menu_now_playing_movies);
+        } else if(id == R.id.filter_top_rated){
+            urlString.append(getString(R.string.top_rated_movies));
+            setTitle(R.string.menu_top_rated_movies);
+        } else if(id == R.id.filter_popular){
+            urlString.append(getString(R.string.popular_movies));
+            setTitle(R.string.menu_popular_movies);
+        } else if(id == R.id.filter_upcoming){
+            urlString.append(getString(R.string.upcoming_movies));
+            setTitle(R.string.menu_upcoming_movies);
         }
+
+        urlString.append("?");
+        urlString.append(getString(R.string.moviedb_api_key));
+
+        new GetMovieList().execute(urlString.toString());
 
         return super.onOptionsItemSelected(item);
     }
@@ -67,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    private class LongOperation extends AsyncTask<String, Integer, JSONObject> implements AdapterView.OnItemClickListener {
+    private class GetMovieList extends AsyncTask<String, Integer, JSONObject> implements AdapterView.OnItemClickListener {
 
         @Override
         protected void onPreExecute() {
@@ -77,24 +97,10 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected JSONObject doInBackground(String... params) {
             JSONObject response;
-            int i = 0;
-            publishProgress(i);
-            StringBuilder urlString = new StringBuilder();
-            urlString.append(getString(R.string.base_url));
-            urlString.append(getString(R.string.discover_movie)).append("?");
-            urlString.append(getString(R.string.moviedb_api_key));
+            String urlString = params[0];
             try{
                 URL url = new URL(urlString.toString());
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                bufferedReader.close();
-                urlConnection.disconnect();
-                response = (JSONObject) new JSONTokener(stringBuilder.toString()).nextValue();
+                response = UrlConnections.getData(url);
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
                 response = null;
@@ -104,7 +110,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(JSONObject result) {
-            Log.d("movieDb", "reached in post execute");
+//            Log.d("movieDb", "reached in post execute");
             try{
                 if(result != null){
                     movieList = new ArrayList<MovieData>();
@@ -117,6 +123,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
                 if(movieList.size() > 0){
+
                     myGrid.setAdapter(new MovieListAdapter(movieList, mainContext));
                     myGrid.setOnItemClickListener(this);
                 }

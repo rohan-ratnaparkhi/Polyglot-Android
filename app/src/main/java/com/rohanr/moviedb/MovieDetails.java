@@ -9,26 +9,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rohanr.moviedb.Adapter.ReviewAdapter;
 import com.rohanr.moviedb.Adapter.TrailerVideoAdapter;
 import com.rohanr.moviedb.Entity.Review;
+import com.rohanr.moviedb.MyUtil.UrlConnections;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -45,12 +39,16 @@ public class MovieDetails extends ActionBarActivity {
     TextView rating;
     TextView year;
     TextView favorite;
+    TextView trailerText;
+    TextView reviewText;
     Button markFav;
     Context parent;
     ArrayList<Trailers> trailersList;
     ArrayList<Review> reviewsList;
     RecyclerView recyclerView, recyclerViewReview;
     SQLiteDatabase db;
+    View trailerSeparator;
+    View reviewSeparator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +69,10 @@ public class MovieDetails extends ActionBarActivity {
         movieId = bundle.get("movieId").toString();
         favorite = (TextView) findViewById(R.id.tv_fav);
         markFav = (Button) findViewById(R.id.btn_fav);
+        trailerText = (TextView) findViewById(R.id.tv_trailers);
+        reviewText = (TextView) findViewById(R.id.tv_reviews);
+        trailerSeparator = findViewById(R.id.trailer_separator);
+        reviewSeparator = findViewById(R.id.review_separator);
 
         db = openOrCreateDatabase("movieDbApp", MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS FavoriteMovie(id INTEGER);");
@@ -92,33 +94,13 @@ public class MovieDetails extends ActionBarActivity {
             }
         });
 
-        new LongOperation().execute("");
+        resultSet.close();
+
+        new GetMovieDetails().execute("");
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_movie_details, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private class LongOperation extends AsyncTask<String, Integer, JSONObject>{
+    private class GetMovieDetails extends AsyncTask<String, Integer, JSONObject>{
 
         @Override
         protected void onPreExecute() {
@@ -136,16 +118,7 @@ public class MovieDetails extends ActionBarActivity {
             urlString.append(getString(R.string.moviedb_api_key));
             try{
                 URL url = new URL(urlString.toString());
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                bufferedReader.close();
-                urlConnection.disconnect();
-                response = (JSONObject) new JSONTokener(stringBuilder.toString()).nextValue();
+                response = UrlConnections.getData(url);
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
                 response = null;
@@ -155,7 +128,7 @@ public class MovieDetails extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(JSONObject result) {
-            Log.d("movieDb", "reached in post execute");
+//            Log.d("movieDb", "reached in post execute");
             try{
                 if(result != null){
                     title.setText(result.getString("title"));
@@ -164,7 +137,7 @@ public class MovieDetails extends ActionBarActivity {
                     year.setText(result.get("release_date").toString());
                     desc.setText(result.getString("overview"));
                     Picasso.with(parent).load("http://image.tmdb.org/t/p/" + getString(R.string.default_poster_size) + result.getString("poster_path")).into(img);
-                    new TrailersData().execute("");
+                    new GetMovieTrailers().execute("");
                 }
 
             } catch (Exception e){
@@ -178,7 +151,7 @@ public class MovieDetails extends ActionBarActivity {
         }
     }
 
-    private class TrailersData extends AsyncTask<String, Integer, JSONObject> {
+    private class GetMovieTrailers extends AsyncTask<String, Integer, JSONObject> {
 
         private TrailerVideoAdapter mAdapter;
 
@@ -197,16 +170,7 @@ public class MovieDetails extends ActionBarActivity {
             urlString.append(getString(R.string.moviedb_api_key));
             try{
                 URL url = new URL(urlString.toString());
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                bufferedReader.close();
-                urlConnection.disconnect();
-                response = (JSONObject) new JSONTokener(stringBuilder.toString()).nextValue();
+                response = UrlConnections.getData(url);
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
                 response = null;
@@ -232,13 +196,14 @@ public class MovieDetails extends ActionBarActivity {
                     }
                 }
                 if(trailersList.size() > 0){
-
+                    trailerSeparator.setAlpha(1);
+                    trailerText.setAlpha(1);
                     mAdapter = new TrailerVideoAdapter(parent, trailersList);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(mLayoutManager);
                     recyclerView.setAdapter(mAdapter);
 
-                    new ReviewOperation().execute("");
+                    new GetMovieReviews().execute("");
 
                 }
             } catch (Exception e){
@@ -252,7 +217,7 @@ public class MovieDetails extends ActionBarActivity {
         }
     }
 
-    private class ReviewOperation extends AsyncTask<String, Integer, JSONObject>{
+    private class GetMovieReviews extends AsyncTask<String, Integer, JSONObject>{
 
         private  ReviewAdapter mAdapter;
 
@@ -273,16 +238,7 @@ public class MovieDetails extends ActionBarActivity {
             urlString.append(getString(R.string.moviedb_api_key));
             try{
                 URL url = new URL(urlString.toString());
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                bufferedReader.close();
-                urlConnection.disconnect();
-                response = (JSONObject) new JSONTokener(stringBuilder.toString()).nextValue();
+                response = UrlConnections.getData(url);
             } catch (Exception e){
                 Log.e("movieDb", e.getMessage());
                 response = null;
@@ -306,7 +262,8 @@ public class MovieDetails extends ActionBarActivity {
                     }
                 }
                 if(reviewsList.size() > 0){
-
+                    reviewSeparator.setAlpha(1);
+                    reviewText.setAlpha(1);
                     mAdapter = new ReviewAdapter(parent, reviewsList);
                     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerViewReview.setLayoutManager(mLayoutManager);

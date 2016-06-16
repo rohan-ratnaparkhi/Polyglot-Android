@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.rohanr.moviedb.Adapter.MovieListAdapter;
 import com.rohanr.moviedb.Entity.MovieData;
@@ -19,11 +18,7 @@ import com.rohanr.moviedb.MyUtil.UrlConnections;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 

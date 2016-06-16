@@ -31,14 +31,13 @@
 
             <ImageView
                 android:layout_width="120dp"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 android:id="@+id/dtl_image"
                 android:layout_below="@+id/dtl_title"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:contentDescription="img" />
 
             <TextView
@@ -71,7 +70,8 @@
                 android:layout_below="@+id/dtl_run_time"
                 android:layout_alignLeft="@+id/dtl_run_time"
                 android:layout_alignStart="@+id/dtl_run_time"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,7 +82,8 @@
                 android:layout_below="@+id/dtl_image"
                 android:layout_alignRight="@+id/dtl_title"
                 android:layout_alignEnd="@+id/dtl_title"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="10dp"
+                android:layout_marginTop="10dp"/>
 
             <View
                 android:layout_width="fill_parent"
@@ -122,12 +123,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mark Favorite"
+                android:text="Mark \nFavorite"
                 android:id="@+id/btn_fav"
                 android:layout_alignBottom="@+id/dtl_image"
                 android:layout_alignLeft="@+id/dtl_rating"
                 android:layout_alignStart="@+id/dtl_rating"
-                android:alpha="0"/>
+                android:alpha="0"
+                android:background="@color/accent_material_dark"
+                android:layout_alignTop="@+id/tv_fav" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -144,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Trailers"
+                android:text="Trailers:"
                 android:id="@+id/tv_trailers"
                 android:layout_below="@+id/trailer_separator"
                 android:layout_alignLeft="@+id/dtl_desc"
@@ -157,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Reviews"
+                android:text="Reviews:"
                 android:id="@+id/tv_reviews"
                 android:layout_below="@+id/review_separator"
                 android:layout_alignLeft="@+id/dtl_desc"
